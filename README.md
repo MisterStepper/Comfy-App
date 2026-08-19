@@ -30,7 +30,7 @@ watches the queue and outputs - without opening ComfyUI's own node graph.
 2. On the phone, open `http://<comfyui-host>:8188/comfy-remote/`.
 3. Chrome → ⋮ → **Install app**. Launches fullscreen, own icon, no address bar.
 
-Serving it from ComfyUI's own web root keeps it same-origin with the API — no
+Serving it from ComfyUI's own web root keeps it same-origin with the API - no
 CORS flag needed. If you serve it elsewhere, start ComfyUI with
 `--enable-cors-header "*"`.
 
