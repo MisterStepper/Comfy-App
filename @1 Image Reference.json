@@ -1,0 +1,324 @@
+{
+  "4": {
+    "inputs": {
+      "vae_name": "flux2\\full_encoder_small_decoder.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "5": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "megapixels": 1.5,
+      "resolution_steps": 1,
+      "image": [
+        "96",
+        0
+      ]
+    },
+    "class_type": "ImageScaleToTotalPixels",
+    "_meta": {
+      "title": "Scale Image to Total Pixels"
+    }
+  },
+  "8": {
+    "inputs": {
+      "text": "A veteran Verdant Spire guard sergeant, weathered orc features, gold-plate cuirass with additional shoulder reinforcement marking rank, a guild-forged longsword held two-handed, a sergeant-grade multi-wand at the belt. Standing in front of a small formation of Guards dressed in gold-plated cuirass (heavier at the shoulder, lighter at the waist — local forge pattern), visored helmet obscuring the face, guild-forged shortsword sheathed at the hip, . Standing at rigid attention at a stone checkpoint archway, one hand raised mid-command. Scarred, sun-worn face, the calm authority of someone who has run this checkpoint for years. Background: Crossroads checkpoint, cart traffic backed up, contraband search in progress. Lighting: harsh midday sun, gold plate catching the light. Painterly digital illustration, imperial-industrial fantasy, weighty and grounded, no text, no watermark.",
+      "clip": [
+        "109",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "9": {
+    "inputs": {
+      "unet_name": "flux2\\flux2_klein_9b_turbo_fp8_V4.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "10": {
+    "inputs": {
+      "clip_name": "flux2\\qwen_3_8b_fp8mixed.safetensors",
+      "type": "flux2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "16": {
+    "inputs": {
+      "samples": [
+        "44",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "18": {
+    "inputs": {
+      "filename_prefix": "3-images",
+      "images": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "19": {
+    "inputs": {
+      "rgthree_comparer": {
+        "images": [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_vtoop_00019_.png&type=temp&subfolder=&rand=0.4381666776005825"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_vtoop_00020_.png&type=temp&subfolder=&rand=0.3142465789282951"
+          }
+        ]
+      },
+      "image_a": [
+        "16",
+        0
+      ],
+      "image_b": [
+        "96",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)",
+    "_meta": {
+      "title": "Image Comparer (rgthree)"
+    }
+  },
+  "22": {
+    "inputs": {
+      "mode": "always",
+      "volume": 0.1,
+      "file": "notify.mp3",
+      "any": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "PlaySound|pysssss",
+    "_meta": {
+      "title": "PlaySound 🐍"
+    }
+  },
+  "23": {
+    "inputs": {
+      "anything": [
+        "16",
+        0
+      ]
+    },
+    "class_type": "easy cleanGpuUsed",
+    "_meta": {
+      "title": "Clean VRAM Used"
+    }
+  },
+  "39": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyFlux2LatentImage",
+    "_meta": {
+      "title": "Empty Flux 2 Latent"
+    }
+  },
+  "40": {
+    "inputs": {
+      "steps": 4,
+      "width": 1024,
+      "height": 1024
+    },
+    "class_type": "Flux2Scheduler",
+    "_meta": {
+      "title": "Flux2Scheduler"
+    }
+  },
+  "41": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "42": {
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "109",
+        0
+      ],
+      "positive": [
+        "50:47",
+        0
+      ],
+      "negative": [
+        "50:47",
+        0
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "CFG Guider"
+    }
+  },
+  "43": {
+    "inputs": {
+      "noise_seed": 618573628564501
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise"
+    }
+  },
+  "44": {
+    "inputs": {
+      "noise": [
+        "43",
+        0
+      ],
+      "guider": [
+        "42",
+        0
+      ],
+      "sampler": [
+        "41",
+        0
+      ],
+      "sigmas": [
+        "40",
+        0
+      ],
+      "latent_image": [
+        "39",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerCustomAdvanced"
+    }
+  },
+  "49": {
+    "inputs": {
+      "conditioning": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "Conditioning Zero Out"
+    }
+  },
+  "96": {
+    "inputs": {
+      "image": "12695.jpg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "109": {
+    "inputs": {
+      "PowerLoraLoaderHeaderWidget": {
+        "type": "PowerLoraLoaderHeaderWidget"
+      },
+      "➕ Add Lora": "",
+      "model": [
+        "9",
+        0
+      ],
+      "clip": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)",
+    "_meta": {
+      "title": "Power Lora Loader (rgthree)"
+    }
+  },
+  "50:46": {
+    "inputs": {
+      "conditioning": [
+        "49",
+        0
+      ],
+      "latent": [
+        "50:48",
+        0
+      ]
+    },
+    "class_type": "ReferenceLatent",
+    "_meta": {
+      "title": "參考潛在空間 負面 圖1"
+    }
+  },
+  "50:47": {
+    "inputs": {
+      "conditioning": [
+        "8",
+        0
+      ],
+      "latent": [
+        "50:48",
+        0
+      ]
+    },
+    "class_type": "ReferenceLatent",
+    "_meta": {
+      "title": "參考潛在空間 正面 圖1"
+    }
+  },
+  "50:48": {
+    "inputs": {
+      "pixels": [
+        "5",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  }
+}
