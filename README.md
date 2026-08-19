@@ -12,6 +12,7 @@ watches the queue and outputs — without opening ComfyUI's own node graph.
 | `ComfyRemote-server-node/` | The web app, served from ComfyUI itself (`web/comfy-remote/`). This is the actual app — a PWA: installable, own icon, works offline for the shell. |
 | `ComfyRemote-android-app/` | Android Studio project — a thin WebView shell around the same app, adding OS integration the browser can't: a native "share to" target so file managers with no picker (e.g. File Manager+) can still hand it images, and an installed-file-app launcher. |
 | `comfy-graphs.js` | Workflow registry: each workflow's API-format graph plus the field map the app uses to find its prompt, sampler, seed, size and LoRA nodes. |
+| `workflows/` | The source ComfyUI exports (API format) that `comfy-graphs.js` is built from — kept alongside the registry so a workflow can be re-exported and re-inferred after editing it in ComfyUI. |
 
 ## Requirements
 
